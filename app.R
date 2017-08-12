@@ -16,14 +16,14 @@
 # Also needed:
 # PhantomJS     pdflatex
 
-packages <- c('ggplot2', 'plotly', 'XLConnect', 'dplyr', 'lubridate', 'leaflet', 
-              'ggmap', 'rmarkdown', 'webshot', 'htmlwidgets', 'reshape2', 
-              'shinydashboard', 'RColorBrewer', 'viridis')
-
-for (package in packages) {
-    if (!(package %in% installed.packages()))
-        install.packages(package)
-}
+# packages <- c('ggplot2', 'plotly', 'XLConnect', 'dplyr', 'lubridate', 'leaflet', 
+#               'ggmap', 'rmarkdown', 'webshot', 'htmlwidgets', 'reshape2', 
+#               'shinydashboard', 'RColorBrewer', 'viridis')
+# 
+# for (package in packages) {
+#     if (!(package %in% installed.packages()))
+#         install.packages(package)
+# }
 
 
 library(shiny)
@@ -38,6 +38,7 @@ library(shinythemes)
 library(reshape2)
 library(RColorBrewer)
 library(viridis)
+library(shinyjs)
 
 
 
@@ -108,8 +109,12 @@ ui <- tagList(
     
     tabPanel(        # Intro page
         title = "INTRO", 
+        useShinyjs(),
         h2("Upload your data here"),
-        fileInput(inputId = "file1", label = "Choose an excel file")
+        fileInput(inputId = "file1", label = "Choose an excel file"),
+        helpText("This button has been disabled.  The original app allowed users
+                 to upload xls or xlsx files.  In this version, the data have 
+                 already been loaded with the app.")
     ), 
     tabPanel(        # Output page 1
         title = "SAMENVATTING", 
@@ -395,13 +400,15 @@ ui <- tagList(
 server <- function(input, output, session) {
     
     ####       Tab 1   ####
+  
+    disable("file1")
     
     # Generates data frame from uploaded data
-    df <- reactive({
-        inFile <- input$file1
-        wk <- loadWorkbook(inFile$datapath)
-        readWorksheet(wk, sheet = 1)
-    })
+    # df <- reactive({
+    #     inFile <- input$file1
+    #     wk <- loadWorkbook(inFile$datapath)
+    #     readWorksheet(wk, sheet = 1)
+    # })
     
     
     ####       Tab 2    ####
