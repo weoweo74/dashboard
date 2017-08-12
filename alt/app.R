@@ -38,7 +38,7 @@ library(shinyjs)
 
 
 downloadBtnMsg = "Download to PDF"
-
+dat = readWorksheet(loadWorkbook("../Dashboard_loggen_sanitized_TOBEUSED.xlsx"), sheet = 1)
 
 
 # Helper function to filter data by time inputs
@@ -98,7 +98,8 @@ ui <- dashboardPage(
                 fileInput(inputId = "file1", label = "Choose an excel file"),
                 helpText("This button has been disabled.  The original app allowed users
                  to upload xls or xlsx files.  In this version, the data have 
-                 already been loaded with the app.")
+                 already been loaded with the app.  Explore the data with the 
+                 visualizations and filtering features on the other tabs.")
             ), 
             tabItem(        # Output page 1
                 tabName = "samenvatting", 
@@ -387,6 +388,8 @@ server <- function(input, output, session) {
     ####       Tab 1   ####
   
     disable("file1")
+  
+    df <- reactive({dat})
     
     # Generates data frame from uploaded data
     # df <- reactive({
@@ -443,8 +446,8 @@ server <- function(input, output, session) {
     
     # Renders table on tab 2
     output$table <- renderDataTable({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         tab2df()
     })
     
@@ -467,8 +470,8 @@ server <- function(input, output, session) {
     
     # Creates checkbox group for selecting levels in Type Waardering on tab 3
     output$plot2ChkGrp <- renderUI({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         types <- unique(df()$Type_Waardering)
         names(types) <- types
         typesList <- as.list(types)
@@ -523,8 +526,8 @@ server <- function(input, output, session) {
     
     # Sends plot1 to ui
     output$plot1 <- renderPlotly({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         plt1()
     })
     
@@ -563,8 +566,8 @@ server <- function(input, output, session) {
     
     # Sends plot2 to ui
     output$plot2 <- renderPlotly({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         
         plt2()
     })
@@ -609,8 +612,8 @@ server <- function(input, output, session) {
     
     # Creates checkbox group for selecting levels in Opdrachtgever on tab 4
     output$plot4OpdrChkGrp <- renderUI({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         types <- unique(df()$Opdrachtgever)
         names(types) <- types
         typesList <- as.list(types)
@@ -623,8 +626,8 @@ server <- function(input, output, session) {
     
     # Creates checkbox group for selecting levels in Type Waardering on tab 4
     output$plot4TypewChkGrp <- renderUI({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         types <- unique(df()$Type_Waardering)
         names(types) <- types
         typesList <- as.list(types)
@@ -666,8 +669,8 @@ server <- function(input, output, session) {
     
     # Renders sends pie chart to ui
     output$plot3 <- renderPlotly({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         plt3()
     })
     
@@ -712,8 +715,8 @@ server <- function(input, output, session) {
     
     # Sends plot to ui
     output$plot4 <- renderLeaflet({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         plt4()
     })
     
@@ -773,8 +776,8 @@ server <- function(input, output, session) {
     
     # Creates checkbox group for selecting levels in Type_Waardering on tab 5
     output$plot6ChkGrp <- renderUI({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         types <- unique(df()$Type_Waardering)
         names(types) <- types
         typesList <- as.list(types)
@@ -818,8 +821,8 @@ server <- function(input, output, session) {
     
     # Sends first bar plot on tab 5 to ui
     output$plot5 <- renderPlotly({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         plt5() 
     })
     
@@ -861,8 +864,8 @@ server <- function(input, output, session) {
     
     # Sends plot6 to ui
     output$plot6 <- renderPlotly({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         plt6()
     })
     
@@ -1008,8 +1011,8 @@ server <- function(input, output, session) {
     
     # Creates checkbox group for selecting levels in Type_Waardering on tab 7
     output$plot8TypewChkGrp <- renderUI({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         types <- unique(df()$Type_Waardering)
         names(types) <- types
         typesList <- as.list(types)
@@ -1022,8 +1025,8 @@ server <- function(input, output, session) {
     
     # Creates checkbox group for selecting levels in Woonplaats on tab 7
     output$plot8WoonChkGrp <- renderUI({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         types <- unique(df()$Woonplaats)
         names(types) <- types
         typesList <- as.list(types)
@@ -1036,8 +1039,8 @@ server <- function(input, output, session) {
     
     # Creates checkbox group for selecting levels in Woningtype_Voorkeur on tab 7
     output$plot8WoningChkGrp <- renderUI({
-        if (is.null(input$file1))
-            return(NULL)
+        # if (is.null(input$file1))
+        #     return(NULL)
         types <- unique(df()$Woningtype_Voorkeur)
         names(types) <- types
         typesList <- as.list(types)
