@@ -1,0 +1,13 @@
+---
+title: "Table Doc"
+output: pdf_document
+params:
+  df: NA
+---
+
+##Your table:
+
+```{r echo=FALSE}
+knitr::kable(params$df)
+```
+

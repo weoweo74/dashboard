@@ -1,0 +1,11 @@
+---
+title: 'Plot Doc'
+output: pdf_document
+params:
+  p1: NA
+---
+
+## Plot 1
+```{r echo=FALSE}
+params$p1
+```
