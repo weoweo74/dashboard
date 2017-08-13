@@ -38,7 +38,7 @@ library(shinyjs)
 
 
 downloadBtnMsg = "Download to PDF"
-dat = readWorksheet(loadWorkbook("../Dashboard_loggen_sanitized_TOBEUSED.xlsx"), sheet = 1)
+dat = readWorksheet(loadWorkbook("Dashboard_loggen_sanitized_TOBEUSED.xlsx"), sheet = 1)
 
 
 # Helper function to filter data by time inputs
