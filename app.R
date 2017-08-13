@@ -391,7 +391,17 @@ ui <- tagList(
                 )
             )
         )    # End row
-    )    # End tab
+    ),    # End tab
+    footer = div(
+      br(), 
+      hr(), 
+      p(
+        "Check out ", 
+        a("version 2", href="https://plumbnapps.shinyapps.io/dashboard-v2/"), 
+        " of the app!", 
+        class="text-center"
+        )
+      )
 ))
 
 ###############################################################################

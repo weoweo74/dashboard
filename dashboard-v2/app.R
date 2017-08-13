@@ -86,8 +86,18 @@ ui <- dashboardPage(
             menuItem("LOCATIE", tabName = "locatie"),
             menuItem("COMPLEXEN PER PERSOON", tabName = "complexen"), 
             menuItem("OPDRACHTGEVERS", tabName = "opdrachtgevers"),
-            menuItem("STATISTIEKEN", tabName = "statistieken")
-            )
+            menuItem("STATISTIEKEN", tabName = "statistieken"), 
+            div(
+              br(), 
+              hr(), 
+              p(
+                "Check out ", 
+                a("version 1", href="https://plumbnapps.shinyapps.io/dashboard/"), 
+                " of the app!", 
+                class="text-center"
+                )            
+              )
+          )
         ),
     dashboardBody(
         tabItems(
