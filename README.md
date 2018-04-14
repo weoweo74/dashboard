@@ -1,1 +1,3 @@
 # dashboard
+
+This repo is for an interactive dashboard built for a client. The app has been modified slightly from its original version. The upload data button has been disabled and some mock sample data has been pre-loaded. The app allows the user to filter data in various ways a several different points, applying those filters to most features down-stream. It includes an interactive data table and numerous interactive visualizations which can be exported to pdf. The app was built in R using the Shiny package and is currently deployed on [shinyapps.io](https://plumbnapps.shinyapps.io/dashboard/ "dashboard on shinyapps.io").
